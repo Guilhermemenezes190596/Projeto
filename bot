@@ -1,0 +1,45 @@
+ <?php
+		
+		/*
+    Guilherme Rodrigues
+    201611384
+    */
+    $file = "updateId.txt";
+
+        function sendMessage($chatId, $text) {
+            file_get_contents("https://api.telegram.org/bot257256140:AAEQNefRxljSbCBDBxqVTdF_PNh6sj5CZ0Q/sendMessage?chat_id=" . $chatId . "&text=" . $text);
+        }
+
+        $url = "https://api.telegram.org/bot257256140:AAEQNefRxljSbCBDBxqVTdF_PNh6sj5CZ0Q/getUpdates";
+        $conteudo = file_get_contents($url);
+        $to = json_decode($conteudo, true);
+        $run = count($to["result"]);
+        $ids = array();
+        $textos = array();
+
+        for ($i = 0; $i < $run; $i++) {
+            
+			$id = $to["result"][$i]["message"]["chat"]["id"];
+            $texto = $to["result"][$i]["message"]["text"];
+			$updateId = $to['result'][$i]['update_id'];
+    
+		
+			//Gerando Numeros aleatorio
+			if ($texto == "/megasena"){
+				$numeroMega = Array();   
+					
+				for ($c = 1; $c <= 6; $c++) {
+					{$numeroMega[] = str_pad(rand(1, 60), 2, '0', STR_PAD_LEFT); 
+				}
+				sort($numeroMega);
+				$sena = implode(" - ", $numeroMega);
+				sendMessage($ids,$sena);
+					
+				file_get_contents($url);
+				file_put_contents($file, $updateId.",", FILE_APPEND);
+        
+			}        //sortear os numeros
+		}
+        
+        ?>
+ 
