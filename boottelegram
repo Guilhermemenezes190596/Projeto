@@ -1,0 +1,18 @@
+<?php
+
+$update = file_get_contents("https://api.telegram.org/bot251544001:AAHfYLrNSMPzjzc38J6EHaeZ4B9_J3od6ss/getUpdates");
+
+		//print_r($update);
+
+$x = json_decode($update, true);
+
+print_r($x);
+//$id = $x["result"]["messagem"]["chat"]["id"];
+//print_r($id);
+
+
+
+
+
+
+?>
